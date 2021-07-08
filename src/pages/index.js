@@ -1,10 +1,11 @@
 import React from 'react';
 import { Button } from '@material-ui/core';
 
+import Layout from '../components/Layout';
+
 export default function Home() {
   return (
-    <Button variant="outlined" color="secondary">
-      Primary
-    </Button>
+    <Layout title='Kombine videos'>
+    </Layout>
   );
 }

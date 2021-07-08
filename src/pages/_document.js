@@ -11,6 +11,11 @@ export default class MyDocument extends Document {
           {/* PWA primary color */ }
           <meta name="theme-color" content={ theme.palette.primary.main } />
           <link
+            rel="icon"
+            href="data:image/x-icon;base64,AAABAAEAEBAQAAEABAAoAQAAFgAAACgAAAAQAAAAIAAAAAEABAAAAAAAgAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAA2f8AAP///wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEREAAiIiIiIREQAAIiIiIhERAAACIiIiEREAAAAiIiIREQAAAAIiIhERAAAAACIiEREAAAAAAiIREQAAAAAAIhERAAAAAAAiEREAAAAAAiIREQAAAAAiIhERAAAAAiIiEREAAAAiIiIREQAAAiIiIhERAAAiIiIiEREAAiIiIiIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+            type="image/x-icon"
+          />
+          <link
             rel="stylesheet"
             href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
           />
