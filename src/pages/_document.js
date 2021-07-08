@@ -1,7 +1,6 @@
 import React from 'react';
 import Document, { Html, Head, Main, NextScript } from 'next/document';
 import { ServerStyleSheets } from '@material-ui/core/styles';
-import theme from '../pages/theme';
 
 export default class MyDocument extends Document {
   render() {
@@ -9,7 +8,7 @@ export default class MyDocument extends Document {
       <Html lang="en">
         <Head>
           {/* PWA primary color */ }
-          <meta name="theme-color" content={ theme.palette.primary.main } />
+          <meta name="theme-color" />
           <link
             rel="icon"
             href="data:image/x-icon;base64,AAABAAEAEBAQAAEABAAoAQAAFgAAACgAAAAQAAAAIAAAAAEABAAAAAAAgAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAA2f8AAP///wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEREAAiIiIiIREQAAIiIiIhERAAACIiIiEREAAAAiIiIREQAAAAIiIhERAAAAACIiEREAAAAAAiIREQAAAAAAIhERAAAAAAAiEREAAAAAAiIREQAAAAAiIhERAAAAAiIiEREAAAAiIiIREQAAAiIiIhERAAAiIiIiEREAAiIiIiIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
