@@ -1,12 +1,15 @@
-import { makeStyles } from '@material-ui/core/styles';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import Box from '@material-ui/core/Box';
-import Paper from '@material-ui/core/Paper';
-import InputBase from '@material-ui/core/InputBase';
-import IconButton from '@material-ui/core/IconButton';
-import Button from '@material-ui/core/Button';
-import Hidden from '@material-ui/core/Hidden';
+import {
+  AppBar,
+  Box,
+  Button,
+  Toolbar,
+  makeStyles,
+  Hidden,
+  Paper,
+  InputBase,
+  IconButton,
+  Avatar,
+} from '@material-ui/core';
 
 import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
@@ -14,6 +17,9 @@ import Apps from '@material-ui/icons/Apps';
 import MoreVert from '@material-ui/icons/MoreVert';
 import VideoCall from '@material-ui/icons/VideoCall';
 import AccountCircle from '@material-ui/icons/AccountCircle';
+
+import { useSession, signIn, signOut } from 'next-auth/client';
+import Image from 'next/image';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -27,10 +33,9 @@ const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
     justifyContent: 'space-between',
   },
-  logo: {
-    cursor: 'pointer',
-    height: 20,
-    marginLeft: theme.spacing(3),
+  avatar: {
+    height: 32,
+    width: 32,
   },
   search: {
     padding: '2px 4px',
@@ -46,16 +51,20 @@ const useStyles = makeStyles((theme) => ({
 
 function TopBar() {
   const classes = useStyles();
+  const [session] = useSession();
 
   return (
     <AppBar className={ classes.root } color='default'>
       <Toolbar className={ classes.toolbar }>
         <Box display='flex' alignItems='center'>
           <MenuIcon />
-          <img
+          <Image
             src='/new-video.svg'
             alt='logo kombine'
-            className={ classes.logo } />
+            height={ 20 }
+            width={ 80 }
+            layout='fixed'
+          />
         </Box>
 
         <Hidden mdDown>
@@ -83,15 +92,28 @@ function TopBar() {
           <IconButton className={ classes.icons }>
             <MoreVert />
           </IconButton>
-          <Button
-            color="secondary"
-            component="a"
-            variant="outlined"
-            startIcon={ <AccountCircle /> }
-          // onClick={() => signIn('google')}
-          >
-            Fazer Login
-          </Button>
+
+          { !session ? (
+            <Button
+              color="secondary"
+              component="a"
+              variant="outlined"
+              startIcon={ <AccountCircle /> }
+              onClick={ () => signIn('google') }
+            >
+              Fazer Login
+            </Button>
+          ) : (
+            <Box display='flex' alignItems='center'>
+              <Avatar
+                onClick={ () => signOut() }
+                alt='User'
+                className={ classes.avatar }
+                src={ session?.user?.image }
+              />
+            </Box>
+          ) }
+
         </Box>
       </Toolbar>
     </AppBar>

@@ -1,4 +1,4 @@
-// import { useState } from 'react';
+import { useState } from 'react';
 import { useRouter } from 'next/router';
 import {
   makeStyles,
@@ -23,7 +23,7 @@ import VideoLibrary from '@material-ui/icons/VideoLibrary';
 import History from '@material-ui/icons/History';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 
-// import { signIn, useSession } from 'next-auth/client';
+import { signIn, useSession } from 'next-auth/client';
 
 const useStyles = makeStyles((theme) => ({
   mobileDrawer: {
@@ -69,17 +69,18 @@ const secondaryManu = [
 function NavBar() {
   const classes = useStyles();
   const router = useRouter();
-  // const [session] = useSession();
-  // const [subscriptions, setSubscriptions] = useState([
-  //   { id: 1, name: 'Canal 1' },
-  //   { id: 2, name: 'Canal 2' },
-  //   { id: 3, name: 'Canal 3' },
-  //   { id: 4, name: 'Canal 4' },
-  //   { id: 5, name: 'Canal 5' },
-  //   { id: 6, name: 'Canal 6' },
-  //   { id: 7, name: 'Canal 7' },
-  //   { id: 8, name: 'Canal 8' },
-  // ]);
+  const [session] = useSession();
+
+  const [subscriptions, setSubscriptions] = useState([
+    { id: 1, name: 'Canal 1' },
+    { id: 2, name: 'Canal 2' },
+    { id: 3, name: 'Canal 3' },
+    { id: 4, name: 'Canal 4' },
+    { id: 5, name: 'Canal 5' },
+    { id: 6, name: 'Canal 6' },
+    { id: 7, name: 'Canal 7' },
+    { id: 8, name: 'Canal 8' },
+  ]);
 
   const isSelected = (item) => router.pathname === item.path;
 
@@ -134,49 +135,50 @@ function NavBar() {
       </List>
       <Divider />
       <Box>
-        {/* { !session ? ( */ }
-        <Box mx={ 4 } my={ 2 }>
-          <Typography variant="body2">
-            Faça login para curtur vídeos, comentar e se inscrever.
-          </Typography>
-          <Box mt={ 2 }>
-            <Button
-              variant="outlined"
-              color="secondary"
-              startIcon={ <AccountCircle /> }
-            >
-              Fazer login
-            </Button>
+        { !session ? (
+          <Box mx={ 4 } my={ 2 }>
+            <Typography variant="body2">
+              Faça login para curtur vídeos, comentar e se inscrever.
+            </Typography>
+            <Box mt={ 2 }>
+              <Button
+                variant="outlined"
+                color="secondary"
+                startIcon={ <AccountCircle /> }
+                onClick={ () => signIn('google') }
+              >
+                Fazer login
+              </Button>
+            </Box>
           </Box>
-        </Box>
-        {/* ) : ( */ }
-        {/* <List
-          subheader={
-            <ListSubheader component="div" id="nested-list-subheader">
-              INSCRIÇÕES
-            </ListSubheader>
-          }
-        > */}
-        {/* { subscriptions.map((item) => (
-          <ListItem
-            key={ item.id }
-            button
-            classes={ { root: classes.listItem } }
-            selected={ isSelected(item) }
+        ) : (
+          <List
+            subheader={
+              <ListSubheader component="div" id="nested-list-subheader">
+                INSCRIÇÕES
+              </ListSubheader>
+            }
           >
-            <ListItemIcon>
-              <Avatar className={ classes.avatar }>H</Avatar>
-            </ListItemIcon>
-            <ListItemText
-              classes={ {
-                primary: classes.listItemText,
-              } }
-              primary={ item.name }
-            />
-          </ListItem>
-        )) } */}
-        {/* </List> */ }
-        {/* ) } */ }
+            { subscriptions.map((item) => (
+              <ListItem
+                key={ item.id }
+                button
+                classes={ { root: classes.listItem } }
+                selected={ isSelected(item) }
+              >
+                <ListItemIcon>
+                  <Avatar className={ classes.avatar }>H</Avatar>
+                </ListItemIcon>
+                <ListItemText
+                  classes={ {
+                    primary: classes.listItemText,
+                  } }
+                  primary={ item.name }
+                />
+              </ListItem>
+            )) }
+          </List>
+        ) }
       </Box>
     </Box >
   );
