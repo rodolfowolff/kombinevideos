@@ -1,10 +1,10 @@
 import { MongoClient } from "mongodb";
 
-const uri = proccess.env.MONGODB_URI;
-const dbName = proccess.env.MONGODB_DB;
+const uri = process.env.MONGODB_URI;
+const dbName = process.env.MONGODB_DB;
 
-const cachedDb;
-const cachedClient;
+let cachedClient;
+let cachedDb;
 
 if (!uri) {
   throw new error(
@@ -18,10 +18,9 @@ if (!dbName) {
   );
 }
 
-
 export async function connectToDatabase() {
   if (cachedClient && cachedDb) {
-    return (client: cachedClient, db: cachedDb);
+    return { client: cachedClient, db: cachedDb };
   }
 
   const client = await MongoClient.connect(uri, {
