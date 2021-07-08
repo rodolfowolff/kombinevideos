@@ -47,7 +47,7 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     alignItems: 'center',
     height: 35,
-    width: 700,
+    width: '100%',
   },
   input: {
     flex: 1,
@@ -73,20 +73,20 @@ function TopBar() {
           />
         </Box>
 
-        <Hidden mdDown>
-          <Box>
-            <Paper component="form" className={ classes.search }>
-              <InputBase
-                className={ classes.input }
-                placeholder="Pesquisar"
-                inputProps={ { 'aria-label': 'search google maps' } }
-              />
-              <IconButton type="submit" aria-label="search">
-                <SearchIcon />
-              </IconButton>
-            </Paper>
-          </Box>
-        </Hidden>
+        {/* <Hidden mdDown> */ }
+        <Box>
+          <Paper component="form" className={ classes.search }>
+            <InputBase
+              className={ classes.input }
+              placeholder="Pesquisar"
+              inputProps={ { 'aria-label': 'search google maps' } }
+            />
+            <IconButton type="submit" aria-label="search">
+              <SearchIcon />
+            </IconButton>
+          </Paper>
+        </Box>
+        {/* </Hidden> */ }
 
         <Box display='flex'>
 
@@ -102,15 +102,17 @@ function TopBar() {
             ) }
           </IconButton>
 
-          <IconButton className={ classes.icons }>
-            <VideoCall />
-          </IconButton>
-          <IconButton className={ classes.icons }>
-            <Apps />
-          </IconButton>
-          <IconButton className={ classes.icons }>
-            <MoreVert />
-          </IconButton>
+          <Hidden mdDown>
+            <IconButton className={ classes.icons }>
+              <VideoCall />
+            </IconButton>
+            <IconButton className={ classes.icons }>
+              <Apps />
+            </IconButton>
+            <IconButton className={ classes.icons }>
+              <MoreVert />
+            </IconButton>
+          </Hidden>
 
           { !session ? (
             <Button
